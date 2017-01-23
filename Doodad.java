@@ -4,10 +4,17 @@ public class Doodad {
 	//fields that Doodad uses
 	private int width, height, xAxis, yAxis;
 	private Image art;
-	private enum owner, vis;
 	
+	//create enum for owner
+	public enum Owner{
+		PLAYER_1, PLAYER_2, PLAYER_3
+	}
+	//create enum for visibility
+	public enum visibility{
+		PLAYER_1, PLAYER_2, PLAYER_3
+	}
 	//constructor
-	public Doodad(int width, int height, Image art, int xAxis, int yAxis, enum owner, enum visible){
+	public Doodad(int width, int height, Image art, int xAxis, int yAxis, owner, visibility){
 		this.width = width;
 		this.height = height;
 		this.xAxis = xAxis;
