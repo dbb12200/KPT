@@ -1,11 +1,11 @@
 package KPT;
 
-import java.awt.Image;
+import java.awt.image.*;
 
 public class Doodad {
 	//fields that Doodad uses
 	private int width, height, xAxis, yAxis;
-	private Image art;
+	private BufferedImage art;
 	private Owner owner;
 	private Visibility visible;
 	
@@ -17,8 +17,9 @@ public class Doodad {
 	public enum Visibility{
 		PLAYER_1, PLAYER_2, PLAYER_3
 	}
+	//      <- this goes back in the Doodad constructor
 	//constructor
-	public Doodad(int width, int height, Image art, int xAxis, int yAxis, Owner owner, Visibility visible){
+	public Doodad(int width, int height, BufferedImage art, int xAxis, int yAxis, Owner owner, Visibility visible){
 		this.width = width;
 		this.height = height;
 		this.xAxis = xAxis;
@@ -59,11 +60,11 @@ public class Doodad {
 		this.yAxis = yAxis;
 	}
 
-	public Image getArt() {
+	public BufferedImage getArt() {
 		return art;
 	}
 
-	public void setArt(Image art) {
+	public void setArt(BufferedImage art) {
 		this.art = art;
 	}
 
