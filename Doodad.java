@@ -1,20 +1,24 @@
 package KPT;
 
+import java.awt.Image;
+
 public class Doodad {
 	//fields that Doodad uses
 	private int width, height, xAxis, yAxis;
 	private Image art;
+	private Owner owner;
+	private Visibility visible;
 	
 	//create enum for owner
 	public enum Owner{
 		PLAYER_1, PLAYER_2, PLAYER_3
 	}
 	//create enum for visibility
-	public enum visibility{
+	public enum Visibility{
 		PLAYER_1, PLAYER_2, PLAYER_3
 	}
 	//constructor
-	public Doodad(int width, int height, Image art, int xAxis, int yAxis, owner, visibility){
+	public Doodad(int width, int height, Image art, int xAxis, int yAxis, Owner owner, Visibility visible){
 		this.width = width;
 		this.height = height;
 		this.xAxis = xAxis;
