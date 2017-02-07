@@ -1,46 +1,50 @@
-package KPT;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Scanner;
 
-import javax.imageio.ImageIO;
-
-import KPT.Doodad.Owner;
-import KPT.Doodad.Visibility;
-
-public class test {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+public class test {	
+	public static void main(String[] args) throws IOException{ 
+		Scanner scan = new Scanner(System.in);
+		int num = 0;
+		int desired;
 		
-		BufferedImage img = null;
-		try{
-			img = ImageIO.read(new File("parrot.jpeg"));
+		
+		System.out.println("How many pictures do you want?");
+		desired = scan.nextInt();
+		
+		Doodad doodad[]= new Doodad[desired];
+		try {
+				{
+					while(num<desired){
+						int[] coords = getCoords(scan);
+						String name = getName(scan);
+						doodad[num] = new Doodad(coords[0], coords[1], name );
+						num++;
+					}
+						
+				}
 		}
-		catch (IOException e){
-			
+		catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 		}
-		
-		ArrayList<Doodad> ar = new ArrayList<>();
-		Doodad d1 = new Doodad(5, 4, img, 3, 16, Owner.PLAYER_1, Visibility.PLAYER_3);
-		Doodad d2 = new Doodad(5, 3, img, 3, 16, Owner.PLAYER_2, Visibility.PLAYER_3);
-		Doodad d3 = new Doodad(5, 2, img, 3, 16, Owner.PLAYER_1, Visibility.PLAYER_3);
-		Doodad d4 = new Doodad(5, 1, img, 3, 16, Owner.PLAYER_2, Visibility.PLAYER_3);
-		
-		ar.add(d1);
-		ar.add(d2);
-		ar.add(d3);
-		ar.add(d4);
-	
-		for(int i = 0; i < ar.size(); i++){
-			System.out.println("Doodad d"+i+"'s height is: " + ar.get(i).getHeight());
-		}
-		
-		for(int i = 0; i < ar.size(); i++){
-			
+		for(int i = 0; i<desired;i++){
+			doodad[i].drag();
 		}
 	}
+	
+	public static String getName(Scanner scan){
+		System.out.print("What is the name of the file: ");
+		return scan.next();
+	}
+	public static int[] getCoords(Scanner scan){
+		int arr[] = new int[2];
+		System.out.println("Please put in coordinates for your piece.");
+		System.out.print("X-coord: ");
+		arr[0] = scan.nextInt();
+		System.out.print("y-coord: ");
+		arr[1] = scan.nextInt();
+		return arr;
+	}
+	
 	
 }
