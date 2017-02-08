@@ -46,7 +46,7 @@ public class Doodad {
         f.addMouseMotionListener(drag);	
 		//sets up picture
         f.setUndecorated(true);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.getContentPane().add(label);
         f.pack();
         f.setLocation(getxAxis(),getyAxis()); 
