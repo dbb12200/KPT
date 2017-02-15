@@ -22,7 +22,7 @@ public class Game {
 		
 	}
 	
-	public Image fileToBoard() throws IOException{
+	public void fileToBoard() throws IOException{
 		//take in string from getBoardName
 		String boardName = getBoardName() + ".jpg";
 		
@@ -33,21 +33,27 @@ public class Game {
 		board = ImageIO.read(file);		
 		
 		//display image
-		return board;
-		
-		
+		JLabel label = new JLabel(new ImageIcon(board));
+		JFrame jf = new JFrame();
+		jf.setUndecorated(true);
+		jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		jf.getContentPane().add(label);
+		jf.pack();
+		jf.add(label);
+		jf.setVisible(true);
 	}
 	
-	public void displayBoard() throws IOException{
+	/*public void displayBoard() throws IOException{
 		JLabel label = new JLabel(new ImageIcon(fileToBoard()));
 		JFrame jf = new JFrame();
-		jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		jf.setUndecorated(true);
-		
+		jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		jf.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		jf.getContentPane().add(label);;
 		jf.pack();
 		jf.setVisible(true);
-	}
+	}*/
 	
 	public static void displayDoodads(){
 		

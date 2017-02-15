@@ -1,3 +1,5 @@
+import java.awt.event.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -44,7 +46,16 @@ public class Doodad {
 		DragListener drag = new DragListener();
         f.addMouseListener(drag);
         f.addMouseMotionListener(drag);	
-		//sets up picture
+        
+        // Give the window an elliptical shape.
+        f.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                f.setShape(new Ellipse2D.Double(0,0,getWidth(),getHeight()));
+            }
+        });
+
+        //sets up picture
         f.setUndecorated(true);
         f.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         f.getContentPane().add(label);
