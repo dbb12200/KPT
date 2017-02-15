@@ -1,13 +1,16 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-public class test {	
+public class test {
+	
+	
 	public static void main(String[] args) throws IOException{ 
 		Scanner scan = new Scanner(System.in);
 		int num = 0;
 		int desired;
+		Game board = new Game();
 		
-		
+		board.fileToBoard();
 		System.out.println("How many pictures do you want?");
 		desired = scan.nextInt();
 		
