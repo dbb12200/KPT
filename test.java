@@ -9,7 +9,7 @@ public class test {
 		int desired;
 		Game board = new Game();
 		
-		board.fileToBoard();
+		//board.fileToBoard();
 		System.out.println("How many pictures do you want?");
 		desired = scan.nextInt();
 		
