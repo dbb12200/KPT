@@ -36,7 +36,7 @@ public class Doodad {
 	}
 	
 	//DragListener makes movement happen
-	public void drag(){
+	public void addDragListener(){
 		
 		//Create the icon and the frame
 		JLabel label = new JLabel(new ImageIcon(image));

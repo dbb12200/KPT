@@ -15,13 +15,7 @@ public class Game {
 	Scanner scan = new Scanner(System.in);
 	BufferedImage board;
 	
-/*	
-	public String getBoardName(){
-		System.out.print("What board do you want: ");
-		return scan.next();
-		
-	}
-*/	
+	
 	public void fileToBoard(String name) throws IOException{
 		//take in string from getBoardName
 		String boardName = name;
