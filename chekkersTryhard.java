@@ -1,11 +1,14 @@
 package cleanedUpGames;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,33 +19,27 @@ public class chekkersTryhard {
 		//create frame
 		JFrame chekkers = new JFrame();
 		
-		//create ArrayList
-		ArrayList<JLabel> chekkerBits = new ArrayList<JLabel>();
-		ArrayList<DoodadTryhard> al = new ArrayList<DoodadTryhard>();
+		//create ArrayList for saving?
+		//ArrayList<JLabel> chekkerBits = new ArrayList<JLabel>();
 		
 		//populate frame background with gameboard pic
-		chekkers.add(insertBackground(chekkers));
+		chekkers.setLayout(new BorderLayout());
+		chekkers.setContentPane(insertBackground(chekkers));
+		
+		
 		
 		
 		
 		//populate the JFrame with chekkerBits
-		createPieces(al);
-		createJLabelsFromBits(chekkerBits, al);
-		addDragListener(chekkerBits);
-		
-		System.out.println(chekkerBits.size());
-		
-		System.out.println();
-		for(int i = 0; i < chekkerBits.size(); i++){
-			chekkers.add(chekkerBits.get(i));
-		}
+		chekkers.setLayout(new GridBagLayout());
+		printRedPieces(chekkers);
+		printBlackPieces(chekkers);
+		printBlankPieces(chekkers);
 	
-		//display stuff
-		
-		chekkers.setSize(800,800);
+		//display stuff		
+		chekkers.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		chekkers.setUndecorated(true);
 		chekkers.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        //chekkers.pack();
 		chekkers.setVisible(true);
 	}
 	
@@ -54,50 +51,139 @@ public class chekkersTryhard {
 		return jl;
 	}
 	
-	//using Doodads, create checkers pieces and add them to the arrayList
-	public static void createPieces(ArrayList<DoodadTryhard> al) throws IOException{
-		String redBits = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/redChecker.png";
-		String redKingBits = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/redKing.png";
-		String blackBits = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/blackChecker.png";
-		String blackKingBits = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/blackKing.png";
-		
-		int redX = 604, redY = 185, redKingX = 1415, redKingY = 410,
-				blackX = 1054, blackY = 275, blackKingX = 424, blackKingY = 410;
-		
-		for(int i = 0; i < 12; i++){
-			al.add(new DoodadTryhard(redX, redY, redBits));
-		}
-		for(int i = 0; i < 12; i++){
-			al.add(new DoodadTryhard(redKingX, redKingY, redKingBits));
-		}
-		for(int i = 0; i < 12; i++){
-			al.add(new DoodadTryhard(blackX, blackY, blackBits));
-		}
-		for(int i = 0; i < 12; i++){
-			al.add(new DoodadTryhard(blackKingX, blackKingY, blackKingBits));
-		}
-	}
-	
-	
-	//Convert the doodads to jLabels
-	public static ArrayList<JLabel> createJLabelsFromBits(ArrayList<JLabel>cb, ArrayList<DoodadTryhard> al) throws IOException{
-		for(int i = 0; i < al.size(); i++){
-			BufferedImage image = ImageIO.read(new File(al.get(i).getName()));
-			JLabel jl = new JLabel(new ImageIcon(image));
-			cb.add(jl);
-		}
-		return cb;
-	}
-	
-	public static void addDragListener(ArrayList<JLabel> al){
+	public static void addDragListener(JLabel jl){
 		DragListenerTryhard dList = new DragListenerTryhard();
-		for(int i = 1; i < al.size(); i ++){
-			al.get(i).addMouseListener(dList);
-			al.get(i).addMouseMotionListener(dList);
-		}
+		jl.addMouseListener(dList);
+		jl.addMouseMotionListener(dList);
 	}
-	
+
 	public static Dimension getScreenDimension(){
 		return Toolkit.getDefaultToolkit().getScreenSize();
 	}
+	
+	public static void printRedPieces(JFrame jf) throws IOException{
+		
+		String rBit = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/redChecker.png";	
+		GridBagConstraints gbc = new GridBagConstraints();
+		int x = 0, y = 0;
+		double weight = 0.5;
+		JLabel jl = new JLabel();
+		
+		gbc.weightx = weight;
+		gbc.weighty = weight;
+
+		
+		//Loop to place red doodads
+		for(int i = 0; i < 3; i++){
+			
+			
+			
+			if(x%2==0){
+				y=0;
+			}
+			else{
+				y=1;
+			}
+			
+			int count = 0;
+			while(count < 4){
+				//Create a DoodadTryHard
+				DoodadTryhard dth = new DoodadTryhard(x,y,rBit);
+				
+				//Convert that to a JLabel
+				jl = dthToJLabel(dth);
+				addDragListener(jl);
+				gbc.gridx = x;
+				gbc.gridy = y;
+				//Add the JLabel and the GridBag
+				jf.add(jl,gbc);
+					
+				y+=2;
+				count+=1;
+			}
+				x+=1;
+		}
+	}
+
+	public static void printBlackPieces(JFrame jf) throws IOException{
+		
+		String rBit = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/blackChecker.png";	
+		GridBagConstraints gbc = new GridBagConstraints();
+		int x = 5, y = 1;
+		double weight = 0.5;
+		JLabel jl = new JLabel();
+		
+		gbc.weightx = weight;
+		gbc.weighty = weight;
+
+		
+		//Loop to place red doodads
+		for(int i = 0; i < 3; i++){
+			
+			
+			
+			if(x%2==0){
+				y=0;
+			}
+			else{
+				y=1;
+			}
+			
+			int count = 0;
+			while(count < 4){
+				//Create a DoodadTryHard
+				DoodadTryhard dth = new DoodadTryhard(x,y,rBit);
+				
+				//Convert that to a JLabel
+				jl = dthToJLabel(dth);
+				addDragListener(jl);
+				gbc.gridx = x;
+				gbc.gridy = y;
+				//Add the JLabel and the GridBag
+				jf.add(jl,gbc);
+					
+				y+=2;
+				count+=1;
+			}
+				x+=1;
+		}
+	}
+	
+	public static void printBlankPieces(JFrame jf) throws IOException{
+		
+		String rBit = "C:/Users/MotherShip/Documents/Programming/KnightlyParty/Pictures/chekkersPics/blackChecker.png";	
+		GridBagConstraints gbc = new GridBagConstraints();
+		int x=3,y=0;
+		double weight = 0.5;
+		JLabel jl = new JLabel();
+		
+		gbc.weightx = weight;
+		gbc.weighty = weight;
+		
+		int count = 0;
+		while(count < 2){
+			//Create a DoodadTryHard
+			DoodadTryhard dth = new DoodadTryhard(x,y,rBit);
+			
+			//Convert that to a JLabel
+			jl = dthToJLabel(dth);
+			addDragListener(jl);
+			gbc.gridx = x;
+			gbc.gridy = y;
+			//Add the JLabel and the GridBag
+			jf.add(jl,gbc);
+			
+			x+=1;
+			count+=1;
+		}
+	}
+	
+	public static JLabel dthToJLabel(DoodadTryhard dth) throws IOException{
+		BufferedImage image = ImageIO.read(new File(dth.getName()));
+		JLabel jl = new JLabel(new ImageIcon(image));
+		jl.setLocation(dth.getxAxis(),dth.getyAxis() );
+		
+		return jl;
+	}
+	
 }

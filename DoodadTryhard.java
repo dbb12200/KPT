@@ -1,13 +1,10 @@
 package cleanedUpGames;
-import java.awt.event.*;
-import java.awt.geom.Ellipse2D;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
-import kpt.DragListener;
 
 public class DoodadTryhard{	
 	private int height, width, xAxis, yAxis;
@@ -38,51 +35,7 @@ public class DoodadTryhard{
 		this.yAxis = yAxis;
 //		this.visible = visible;
 	}
-	
-	public void addToFramer(){
-		
-	}
-	
-	public void addToFrame(JFrame jf){
-		JLabel label = new JLabel(new ImageIcon(image));
-		jf.add(label);
-		
-		// Give the window an elliptical shape.
-        jf.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                jf.setShape(new Ellipse2D.Double(0,0,getWidth(),getHeight()));
-            }
-        });
-		
-        jf.setUndecorated(true);
-        jf.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        jf.getContentPane().add(label);
-        jf.pack();
-        jf.setLocation(getxAxis(),getyAxis()); 
-        jf.setVisible(true);
-	}
-	
-	//DragListener makes movement happen
-	public void addDragListener (JLabel jf){
-		
-		//create the draglistener
-		DragListener drag = new DragListener();
-        jf.addMouseListener(drag);
-        jf.addMouseMotionListener(drag);	
-        
-        // Give the window an elliptical shape.
-        /* jf.addComponentListener(new ComponentAdapter() {
-             @Override
-             public void componentResized(ComponentEvent e) {
-                 jf.setShape(new Ellipse2D.Double(0,0,getWidth(),getHeight()));
-           }
-        });
-        */
-        
 
-	}
-	
 	//getters and setters
 	public int getHeight() {
 		return height;
