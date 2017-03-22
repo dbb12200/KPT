@@ -38,10 +38,11 @@ public class chekkersTryhard {
 		}
 	
 		//display stuff
-		chekkers.setSize(getScreenDimension());
+		
+		chekkers.setSize(800,800);
 		chekkers.setUndecorated(true);
 		chekkers.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        chekkers.pack();
+        //chekkers.pack();
 		chekkers.setVisible(true);
 	}
 	
